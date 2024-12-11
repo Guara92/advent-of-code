@@ -19,7 +19,7 @@ pub fn part_one(input: &str) -> Option<u32> {
 
 pub fn part_two(input: &str) -> Option<u32> {
     let mut result = 0;
-    let mut valid = false;
+    let mut valid = true;
     for m in RE_2.captures_iter(input) {
         if m.name("d").is_some() {
             valid = true;
