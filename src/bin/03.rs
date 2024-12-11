@@ -12,18 +12,18 @@ static RE_2: LazyLock<Regex> = LazyLock::new(|| {
 pub fn part_one(input: &str) -> Option<u32> {
     let mut result = 0;
     for c in RE_1.captures_iter(input) {
-        result += &c[1].parse::<u32>().unwrap() * &c[2].parse::<u32>().unwrap();
+        result += c[1].parse::<u32>().unwrap() * c[2].parse::<u32>().unwrap();
     }
     Some(result)
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
     let mut result = 0;
-    let mut valid = true;
+    let mut valid = false;
     for m in RE_2.captures_iter(input) {
-        if let Some(_) = m.name("d") {
+        if m.name("d").is_some() {
             valid = true;
-        } else if let Some(_) = m.name("dt") {
+        } else if m.name("dt").is_some() {
             valid = false;
         }
         if valid {
