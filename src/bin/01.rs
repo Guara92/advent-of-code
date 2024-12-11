@@ -7,7 +7,7 @@ pub fn part_one(input: &str) -> Option<u64> {
     let mut right = BinaryHeap::with_capacity(lines.size_hint().0);
     let mut left = BinaryHeap::with_capacity(lines.size_hint().0);
     for line in lines {
-        let mut el = line.split(' ');
+        let mut el = line.split_whitespace();
         left.push(el.next().unwrap().parse::<u32>().unwrap());
         right.push(el.last().unwrap().parse::<u32>().unwrap());
     }
@@ -24,7 +24,7 @@ pub fn part_two(input: &str) -> Option<u32> {
     let mut left: HashMap<u32, u32> = HashMap::with_capacity(lines.size_hint().0);
     let mut right: HashMap<u32, u32> = HashMap::with_capacity(lines.size_hint().0);
     for line in lines {
-        let mut el = line.split(' ');
+        let mut el = line.split_whitespace();
         left.entry(el.next().unwrap().parse::<u32>().unwrap())
             .and_modify(|counter| *counter += 1)
             .or_insert(1);
