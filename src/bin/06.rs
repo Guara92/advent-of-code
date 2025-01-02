@@ -32,10 +32,10 @@ fn bound_check(x: i32, y: i32, width: usize, height: usize) -> bool {
 }
 
 fn next(actual: (usize, usize), direction: (i32, i32)) -> (i32, i32) {
-    return (
+    (
         (actual.0 as i32 + direction.0),
         (actual.1 as i32 + direction.1),
-    );
+    )
 }
 
 fn find_start(map: &[Vec<char>]) -> (usize, usize) {
@@ -46,7 +46,7 @@ fn find_start(map: &[Vec<char>]) -> (usize, usize) {
             }
         }
     }
-    return (0, 0);
+    (0, 0)
 }
 
 fn out_of_grid2(start: &(i32, i32, usize), m: &[Vec<char>]) -> Option<i32> {
@@ -97,7 +97,7 @@ pub fn part_two(input: &str) -> Option<u32> {
     let width = m[0].len();
     let height = m.len();
 
-    let dirs: [(i32,i32); 4] = [(-1, 0), (0, 1), (1, 0), (0, -1)];
+    let dirs: [(i32, i32); 4] = [(-1, 0), (0, 1), (1, 0), (0, -1)];
     let mut cur_idx = 0;
     let (mut cur_x, mut cur_y) = (start.0, start.1);
 
@@ -108,7 +108,7 @@ pub fn part_two(input: &str) -> Option<u32> {
         visited[cur_x as usize][cur_y as usize] = true;
         let cur_step = dirs[cur_idx];
         let (new_x, new_y) = (cur_x + cur_step.0, cur_y + cur_step.1);
-        if !bound_check(new_x as i32, new_y as i32, width, height) {
+        if !bound_check(new_x, new_y, width, height) {
             break;
         }
         if m[new_x as usize][new_y as usize] == '#' {
@@ -116,7 +116,7 @@ pub fn part_two(input: &str) -> Option<u32> {
         } else {
             if (new_x, new_y) != start && !visited[new_x as usize][new_y as usize] {
                 m[new_x as usize][new_y as usize] = '#';
-                if out_of_grid2(&(cur_x as i32, cur_y as i32, cur_idx), &m).is_none() {
+                if out_of_grid2(&(cur_x, cur_y, cur_idx), &m).is_none() {
                     res += 1;
                 }
                 m[new_x as usize][new_y as usize] = '.';
