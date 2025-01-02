@@ -38,19 +38,19 @@ impl Equation {
     }
 
     fn is_valid2(&self, a: u64, nums: &[u64]) -> bool {
-        if nums.len() == 0 {
+        if nums.is_empty() {
             return self.result == a;
         }
         let (h, t) = (nums[0], &nums[1..]);
-        return self.is_valid2(a * h, t)
+        self.is_valid2(a * h, t)
             || self.is_valid2(a + h, t)
             || self.is_valid2(
                 [a.to_string(), h.to_string()]
                     .concat()
                     .parse::<u64>()
                     .unwrap(),
-                &t,
-            );
+                t,
+            )
     }
 }
 
